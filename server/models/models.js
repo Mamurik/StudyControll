@@ -42,13 +42,6 @@ Lab.belongsTo(Subject);
 Lab.hasMany(UserLabProgress);
 UserLabProgress.belongsTo(Lab);
 
-// User -> Readiness (1 ко многим)
-User.hasMany(Readiness);
-Readiness.belongsTo(User);
-
-// Subject -> Readiness (1 ко многим)
-Subject.hasMany(Readiness);
-Readiness.belongsTo(Subject);
 
 module.exports={
         User,
