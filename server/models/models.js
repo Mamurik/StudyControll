@@ -15,14 +15,11 @@ const Subject = sequelize.define("subject",{
 })
 const Lab = sequelize.define("lab",{
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    subject_id:{type:DataTypes.INTEGER,references:{model:Subject,key:'id'}},
     lab_number:{type:DataTypes.INTEGER},
-    max_points:{type:DataTypes.INTEGER,defaultValue:0}
+    max_points:{type:DataTypes.INTEGER,defaultValue:5}
 })
 const UserLabProgress = sequelize.define("userLabProgress",{
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    user_id:{type:DataTypes.INTEGER,references:{model:User,key:'id'}},
-    lab_id:{type:DataTypes.INTEGER,references:{model:Lab,key:'id'}},
     status: { 
         type: DataTypes.INTEGER, 
         validate: { min: 0, max: 5 }, 
