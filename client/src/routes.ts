@@ -1,9 +1,9 @@
+import Lab from "./components/Lab/Lab";
 import Admin from "./pages/Admin/Admin";
 import Auth from "./pages/Auth/Auth";
-import Main from "./pages/Main";
 import Subjects from "./pages/Subject/Subjects";
 import UserLabProgress from "./pages/UserLabProgress";
-import { ADMIN_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, SUBJECTS_ROUTE, USERLABPROGRESS_ROUTE } from "./utils/consts";
+import { ADMIN_ROUTE, LAB_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SUBJECTS_ROUTE, USERLABPROGRESS_ROUTE } from "./utils/consts";
 
 export interface IRoute {
   path: string;
@@ -34,7 +34,7 @@ export const publicRoutes: IRoute[]= [
      element:Subjects
     },
     {
-      path:MAIN_ROUTE,
-      element:Main
-    }
+      path:LAB_ROUTE,
+      element:Lab
+     }
 ]

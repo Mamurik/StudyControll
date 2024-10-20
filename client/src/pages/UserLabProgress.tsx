@@ -1,66 +1,48 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { useGetUserLabProgressQuery } from "../http/userLabProgressApi";
 import { IUserLabProgress } from "../API/api";
 
-interface IUserProgress {
-  userId: number;
-  subjectId: number;
-  subjectName: string;
-  totalLabs: number;
-  labProgress: IUserLabProgress[];
-}
-
 const UserLabProgress: React.FC = () => {
-  const userProgress: IUserProgress[] = [
-    {
-      userId: 1,
-      subjectId: 1,
-      subjectName: "Математика",
-      totalLabs: 5,
-      labProgress: [
-        { id: 1, labId: 1, userId: 1, status: 4 },
-        { id: 2, labId: 2, userId: 1, status: 5 },
-        { id: 3, labId: 3, userId: 1, status: 3 },
-        { id: 4, labId: 4, userId: 1, status: 0 },
-        { id: 5, labId: 5, userId: 1, status: 2 },
-      ],
-    },
-    {
-      userId: 1,
-      subjectId: 2,
-      subjectName: "Физика",
-      totalLabs: 5,
-      labProgress: [
-        { id: 6, labId: 1, userId: 1, status: 5 },
-        { id: 7, labId: 2, userId: 1, status: 3 },
-        { id: 8, labId: 3, userId: 1, status: 2 },
-        { id: 9, labId: 4, userId: 1, status: 0 },
-        { id: 10, labId: 5, userId: 1, status: 1 },
-      ],
-    },
-  ];
+  const userId = useSelector((state: RootState) => state.user.user?.id);
+  const username = useSelector((state: RootState) => state.user.user?.username); // Имя пользователя
+
+  // Пропускаем запрос, если userId нет
+  const {
+    data: userProgress = [],
+    isLoading,
+    error,
+  } = useGetUserLabProgressQuery(userId as number, { skip: !userId });
+
+  if (!userId) {
+    return (
+      <div>Пожалуйста, войдите в систему, чтобы увидеть свой прогресс.</div>
+    );
+  }
+
+  if (isLoading) return <div>Загрузка...</div>;
+  if (error) {
+    let errorMessage = "Неизвестная ошибка";
+
+    if ("status" in error && "data" in error) {
+      errorMessage = `Ошибка: ${error.status} ${JSON.stringify(error.data)}`;
+    } else if ("message" in error) {
+      errorMessage = `Ошибка: ${error.message}`;
+    }
+
+    return <div>{errorMessage}</div>;
+  }
 
   return (
     <div>
-      {userProgress.map((progress) => (
-        <div key={progress.subjectId}>
-          <h2>Прогресс пользователя по предмету: {progress.subjectName}</h2>
-          <h3>Всего лабораторных работ: {progress.totalLabs}</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Номер лабораторной работы</th>
-                <th>Статус (0-5)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {progress.labProgress.map((lab) => (
-                <tr key={lab.id}>
-                  <td>{lab.labId}</td>
-                  <td>{lab.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <h1>Прогресс пользователя: {username}</h1>
+      {userProgress.map((progress: IUserLabProgress) => (
+        <div key={progress.id}>
+          <h2>Лабораторная работа ID: {progress.labId}</h2>
+          <h3>Статус (0-5): {progress.status}</h3>
+          <h4>название предмета: {}</h4>
+          <h4>Всего лабораторных работ по предмету:{} </h4>
         </div>
       ))}
     </div>

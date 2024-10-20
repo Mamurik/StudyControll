@@ -15,6 +15,7 @@ router.post(
 );
 
 router.get('/', labController.getAll);
+router.get('/:id', labController.getById);
 router.delete('/:id',checkRole("admin"), labController.delete);
 
 module.exports = router;

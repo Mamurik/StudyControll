@@ -15,6 +15,7 @@ router.post(
 );
 
 router.get('/', userLabProgressController.getAll);
+router.get('/:id', userLabProgressController.getByUserId);
 router.delete('/:id', userLabProgressController.delete);
 
 router.put(

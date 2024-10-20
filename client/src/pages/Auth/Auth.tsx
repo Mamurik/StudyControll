@@ -5,8 +5,8 @@ import { login, registration } from "../../http/userApi";
 import { setIsAuth, setUser } from "../../store/Slices/userSlice";
 import {
   LOGIN_ROUTE,
-  MAIN_ROUTE,
   REGISTRATION_ROUTE,
+  USERLABPROGRESS_ROUTE,
 } from "../../utils/consts";
 import classes from "./Auth.module.css";
 
@@ -30,7 +30,7 @@ const Auth = () => {
 
       dispatch(setIsAuth(true));
       dispatch(setUser(data));
-      navigate(MAIN_ROUTE);
+      navigate(USERLABPROGRESS_ROUTE);
     } catch (e: any) {
       alert(e.response.data.message);
     }

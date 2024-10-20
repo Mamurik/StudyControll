@@ -1,18 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { selectIsAuth, setIsAuth } from "../../store/Slices/userSlice";
-import { ADMIN_ROUTE, LOGIN_ROUTE, MAIN_ROUTE } from "../../utils/consts"; // Убедитесь, что ADMIN_ROUTE импортируется
+import { Link, useNavigate } from "react-router-dom";
+import { logout, selectIsAuth } from "../../store/Slices/userSlice";
+import { ADMIN_ROUTE, LOGIN_ROUTE } from "../../utils/consts";
 import classes from "./NavBar.module.css";
 
 const NavBar = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div>
       <nav className={classes.navbar}>
         <div>
-          <Link className={classes.list_item_link} to={MAIN_ROUTE}>
+          <Link className={classes.list_item_link} to={"/"}>
             StudyControll
           </Link>
         </div>
@@ -24,22 +27,25 @@ const NavBar = () => {
               </Link>
             </li>
             <li className={classes.list_item}>
-              <Link to={MAIN_ROUTE}>
-                <button className={classes.list_item_but}>Выйти </button>
+              <Link to={"/"}>
+                <button
+                  className={classes.list_item_but}
+                  onClick={handleLogout}
+                >
+                  Выйти{" "}
+                </button>
               </Link>
             </li>
           </ul>
         ) : (
           <ul className={classes.list}>
             <li className={classes.list_item}>
-              <Link to={LOGIN_ROUTE}>
-                <button
-                  className={classes.list_item_but}
-                  onClick={() => dispatch(setIsAuth(true))}
-                >
-                  Авторизация
-                </button>
-              </Link>
+              <button
+                className={classes.list_item_but}
+                onClick={() => navigate(LOGIN_ROUTE)}
+              >
+                Авторизация
+              </button>
             </li>
           </ul>
         )}

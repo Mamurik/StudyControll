@@ -5,35 +5,30 @@ import {
   setSelectedSubject,
   setSubjects,
 } from "../../store/Slices/subjectSlice";
+import { useGetSubjectsQuery } from "../../http/subjectApi";
 import { ISubject } from "../../API/api";
 import classes from "./SubjectBar.module.css";
 
 const SubjectBar = () => {
   const dispatch = useDispatch();
-  const subjects = useSelector((state: RootState) => state.subject.subjects);
   const selectedSubject = useSelector(
     (state: RootState) => state.subject.selectedSubject
   );
 
+  const { data: subjects = [], error, isLoading } = useGetSubjectsQuery();
+
   useEffect(() => {
-    const initialSubjects: ISubject[] = [
-      {
-        id: 1,
-        name: "ВСРПП",
-        total_labs: 8,
-      },
-      {
-        id: 2,
-        name: "ВВНС",
-        total_labs: 5,
-      },
-    ];
-    dispatch(setSubjects(initialSubjects));
-  }, [dispatch]);
+    if (subjects.length > 0) {
+      dispatch(setSubjects(subjects));
+    }
+  }, [subjects, dispatch]);
 
   const handleSelectSubject = (subject: ISubject) => {
     dispatch(setSelectedSubject(subject));
   };
+
+  if (isLoading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка при загрузке данных</div>;
 
   return (
     <div className={classes.container}>

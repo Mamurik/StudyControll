@@ -22,7 +22,18 @@ class LabController {
     const labs = await Lab.findAll();
     return res.json(labs);
   }
-
+  async getById(req, res, next) {
+    try {
+      const { id } = req.params;
+      const labById = await Lab.findOne({ where: { id } });
+      if (!labById) {
+        return next(ApiError.notFound('Лаба не найден'));
+      }
+      res.json(labById);
+    } catch (error) {
+      next(ApiError.internal('Ошибка при получении лабы'));
+    }
+  }
   async delete(req, res, next) {
     try {
       const { id } = req.params;

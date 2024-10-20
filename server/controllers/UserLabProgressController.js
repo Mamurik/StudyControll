@@ -22,6 +22,21 @@ class UserLabProgressController {
     const userLabProgress = await UserLabProgress.findAll();
     return res.json(userLabProgress);
   }
+  async getByUserId(req, res, next) {
+    try {
+      const { id } = req.params; 
+      const userLabProgress = await UserLabProgress.findAll({ where: { userId: id } });
+  
+      if (!userLabProgress.length) {
+        return next(ApiError.notFound('Прогресс по лабораторным работам не найден для этого пользователя'));
+      }
+  
+      return res.json(userLabProgress);
+    } catch (error) {
+      next(ApiError.internal('Ошибка при получении прогресса по лабораторным работам'));
+    }
+  }
+  
 
   async delete(req, res, next) {
     try {
