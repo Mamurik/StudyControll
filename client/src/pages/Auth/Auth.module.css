@@ -58,4 +58,11 @@
     justify-content: center;
     margin-top: 1rem; 
   }
-  
+  .reg_link{
+    color: #4a90e2;
+    transition: 0.3s;
+  }
+  .reg_link:hover{
+    opacity: 0.8;
+    transition: 0.3s;
+  }

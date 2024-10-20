@@ -13,7 +13,8 @@ const userLabProgressSlice = createSlice({
     reducers:{
         setUserLabProgress:(state,action:PayloadAction<IUserLabProgress[]>)=>{
             state.progresses = action.payload
-        }
+        },
+        
     }
 })
 

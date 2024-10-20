@@ -1,22 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ISubject } from "../../API/api";
 
-interface subjectState{
-    subjects:ISubject[]
+interface subjectState {
+  subjects: ISubject[];
+  selectedSubject: ISubject | null; 
 }
-const initialState:subjectState={
-    subjects:[]
-}
+
+const initialState: subjectState = {
+  subjects: [],
+  selectedSubject: null, 
+};
+
 const subjectSlice = createSlice({
-    name:'subject',
-    initialState,
-    reducers:{
-        setSubject:(state,action:PayloadAction<ISubject[]>)=>{
-            state.subjects = action.payload
-        }
-    }
-})
+  name: 'subject',
+  initialState,
+  reducers: {
+    setSubjects: (state, action: PayloadAction<ISubject[]>) => {
+      state.subjects = action.payload;
+    },
+    setSelectedSubject: (state, action: PayloadAction<ISubject>) => {
+      state.selectedSubject = action.payload;
+    },
+    clearSelectedSubject: (state) => {
+      state.selectedSubject = null;
+    },
+  },
+});
 
-export const {setSubject} = subjectSlice.actions
+export const { setSubjects, setSelectedSubject, clearSelectedSubject } = subjectSlice.actions;
 
-export default subjectSlice.reducer
+export default subjectSlice.reducer;
