@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout, selectIsAuth } from "../../store/Slices/userSlice";
-import { ADMIN_ROUTE, LOGIN_ROUTE } from "../../utils/consts";
+import {
+  ADMIN_ROUTE,
+  LOGIN_ROUTE,
+  USERLABPROGRESS_ROUTE,
+} from "../../utils/consts";
 import classes from "./NavBar.module.css";
 
 const NavBar = () => {
@@ -15,8 +19,11 @@ const NavBar = () => {
     <div>
       <nav className={classes.navbar}>
         <div>
-          <Link className={classes.list_item_link} to={"/"}>
+          <Link className={classes.list_item_link} to={USERLABPROGRESS_ROUTE}>
             StudyControll
+          </Link>
+          <Link className={classes.list_item_link} to={"/lab"}>
+            Поиск по лабе
           </Link>
         </div>
         {isAuth ? (
@@ -27,7 +34,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li className={classes.list_item}>
-              <Link to={"/"}>
+              <Link to={USERLABPROGRESS_ROUTE}>
                 <button
                   className={classes.list_item_but}
                   onClick={handleLogout}

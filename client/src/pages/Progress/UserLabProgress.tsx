@@ -1,14 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { useGetUserLabProgressQuery } from "../http/userLabProgressApi";
-import { IUserLabProgress } from "../API/api";
-
+import { RootState } from "../../store/store";
+import { useGetUserLabProgressQuery } from "../../http/userLabProgressApi";
+import { IUserLabProgress } from "../../API/api";
+import classes from "./UserLabProgres.module.css";
 const UserLabProgress: React.FC = () => {
   const userId = useSelector((state: RootState) => state.user.user?.id);
-  const username = useSelector((state: RootState) => state.user.user?.username); // Имя пользователя
+  const username = useSelector((state: RootState) => state.user.user?.username);
 
-  // Пропускаем запрос, если userId нет
   const {
     data: userProgress = [],
     isLoading,
@@ -31,18 +30,20 @@ const UserLabProgress: React.FC = () => {
       errorMessage = `Ошибка: ${error.message}`;
     }
 
-    return <div>{errorMessage}</div>;
+    return <h1 style={{ textAlign: "center" }}>У пользователя нет лаб</h1>;
   }
 
   return (
-    <div>
-      <h1>Прогресс пользователя: {username}</h1>
+    <div className={classes.container}>
+      <h1 className={classes.progress_h1}>Прогресс пользователя: {username}</h1>
       {userProgress.map((progress: IUserLabProgress) => (
-        <div key={progress.id}>
-          <h2>Лабораторная работа ID: {progress.labId}</h2>
-          <h3>Статус (0-5): {progress.status}</h3>
-          <h4>название предмета: {}</h4>
-          <h4>Всего лабораторных работ по предмету:{} </h4>
+        <div className={classes.progress_List} key={progress.id}>
+          <h2 className={classes.progress_h2}>
+            Лабораторная работа ID: {progress.labId}
+          </h2>
+          <h3 className={classes.progress_h3}>
+            Статус (0-5): {progress.status}
+          </h3>
         </div>
       ))}
     </div>

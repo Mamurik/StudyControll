@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
+import Loader from "./components/UI/Loader/Loader";
 import { check } from "./http/userApi";
 import AppRouter from "./pages/AppRouter";
 import { setIsAuth, setUser } from "./store/Slices/userSlice";
 import { RootState } from "./store/store";
-import Loader from "./components/UI/Loader/Loader";
-import SubjectBar from "./components/SubjectBar/SubjectBar";
-import Lab from "./components/Lab/Lab";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -31,7 +29,6 @@ const App = () => {
   return (
     <BrowserRouter>
       <NavBar />
-      <SubjectBar></SubjectBar>
       <AppRouter />
     </BrowserRouter>
   );
