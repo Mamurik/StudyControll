@@ -1,4 +1,4 @@
-const { UserLabProgress } = require("../models/models");
+const { UserLabProgress, Lab, Subject } = require("../models/models");
 const ApiError = require('../error/ApiError');
 const { body, validationResult } = require('express-validator');
 
@@ -10,8 +10,8 @@ class UserLabProgressController {
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const { status, userId, labId } = req.body;
-      const userLabProgress = await UserLabProgress.create({ status, userId, labId });
+      const { status, userId, labId,subjectId } = req.body;
+      const userLabProgress = await UserLabProgress.create({ status, userId, labId,subjectId});
       return res.json(userLabProgress);
     } catch (error) {
       next(ApiError.internal('Ошибка при создании прогресса по лабораторной работе'));
@@ -19,24 +19,44 @@ class UserLabProgressController {
   }
 
   async getAll(req, res) {
-    const userLabProgress = await UserLabProgress.findAll();
+    const userLabProgress = await UserLabProgress.findAll({
+        include: [{
+            model: Lab,
+            include: [{
+                model: Subject,
+                attributes: ['name', 'total_labs'] 
+            }]
+        }]
+    });
     return res.json(userLabProgress);
-  }
-  async getByUserId(req, res, next) {
-    try {
-      const { id } = req.params; 
-      const userLabProgress = await UserLabProgress.findAll({ where: { userId: id } });
-  
+}
+
+
+
+async getByUserId(req, res, next) {
+  try {
+      const { id } = req.params;
+      const userLabProgress = await UserLabProgress.findAll({
+          where: { userId: id },
+          include: [{
+              model: Lab,
+              include: [{
+                  model: Subject,
+                  attributes: ['name', 'total_labs'] 
+              }]
+          }]
+      });
+
       if (!userLabProgress.length) {
-        return next(ApiError.notFound('Прогресс по лабораторным работам не найден для этого пользователя'));
+          return next(ApiError.notFound('Прогресс по лабораторным работам не найден для этого пользователя'));
       }
-  
+
       return res.json(userLabProgress);
-    } catch (error) {
+  } catch (error) {
       next(ApiError.internal('Ошибка при получении прогресса по лабораторным работам'));
-    }
   }
-  
+}
+
 
   async delete(req, res, next) {
     try {
@@ -46,9 +66,9 @@ class UserLabProgressController {
         return next(ApiError.notFound('Прогресс не найден'));
       }
       await userLabProgress.destroy();
-      return res.json({ message: "Прогресс по лабе успешно удален" });
+      return res.json({ message: "Прогресс по лабораторной работе успешно удален" });
     } catch (error) {
-      next(ApiError.internal('Ошибка при удалении прогресса'));
+      next(ApiError.internal('Ошибка при удалении прогресса по лабораторной работе'));
     }
   }
 

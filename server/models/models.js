@@ -1,24 +1,26 @@
 const sequelize = require("../db")
 const DataTypes = require("sequelize")
 
-const User = sequelize.define("user",{
+const User = sequelize.define("user", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    username:{type:DataTypes.STRING,unique:true},
-    password:{type:DataTypes.STRING},
-    role:{type:DataTypes.STRING,defaultValue:"student"}
+    username: { type: DataTypes.STRING, unique: true },
+    password: { type: DataTypes.STRING },
+    role: { type: DataTypes.STRING, defaultValue: "student" }
 })
 
-const Subject = sequelize.define("subject",{
+const Subject = sequelize.define("subject", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name:{type:DataTypes.STRING,unique:true},
-    total_labs:{type:DataTypes.INTEGER},
+    name: { type: DataTypes.STRING, unique: true },
+    total_labs: { type: DataTypes.INTEGER },
 })
-const Lab = sequelize.define("lab",{
+
+const Lab = sequelize.define("lab", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    lab_number:{type:DataTypes.INTEGER},
-    max_points:{type:DataTypes.INTEGER,defaultValue:5}
+    lab_number: { type: DataTypes.INTEGER },
+    max_points: { type: DataTypes.INTEGER, defaultValue: 5 }
 })
-const UserLabProgress = sequelize.define("userLabProgress",{
+
+const UserLabProgress = sequelize.define("userLabProgress", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     status: { 
         type: DataTypes.INTEGER, 
@@ -40,9 +42,16 @@ Lab.hasMany(UserLabProgress);
 UserLabProgress.belongsTo(Lab);
 
 
-module.exports={
-        User,
-        Subject,
-        Lab,
-        UserLabProgress
+UserLabProgress.addScope('withSubject', {
+    include: [{
+        model: Subject,
+        attributes: ['name', 'total_labs'] 
+    }]
+})
+
+module.exports = {
+    User,
+    Subject,
+    Lab,
+    UserLabProgress
 }

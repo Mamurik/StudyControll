@@ -1,4 +1,4 @@
-const { Lab } = require('../models/models');
+const { Lab, Subject } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const { body, validationResult } = require('express-validator');
 
@@ -19,21 +19,38 @@ class LabController {
   }
 
   async getAll(req, res) {
-    const labs = await Lab.findAll();
-    return res.json(labs);
+    try {
+      const labs = await Lab.findAll({
+        include: [{
+          model: Subject,
+          attributes: ['name', 'total_labs'] // Включаем название предмета и количество лабораторных
+        }]
+      });
+      return res.json(labs);
+    } catch (error) {
+      next(ApiError.internal('Ошибка при получении лабораторных'));
+    }
   }
+
   async getById(req, res, next) {
     try {
       const { id } = req.params;
-      const labById = await Lab.findOne({ where: { id } });
+      const labById = await Lab.findOne({
+        where: { id },
+        include: [{
+          model: Subject,
+          attributes: ['name', 'total_labs'] // Включаем название предмета и количество лабораторных
+        }]
+      });
       if (!labById) {
-        return next(ApiError.notFound('Лаба не найден'));
+        return next(ApiError.notFound('Лабораторная работа не найдена'));
       }
       res.json(labById);
     } catch (error) {
-      next(ApiError.internal('Ошибка при получении лабы'));
+      next(ApiError.internal('Ошибка при получении лабораторной работы'));
     }
   }
+
   async delete(req, res, next) {
     try {
       const { id } = req.params;
@@ -42,7 +59,7 @@ class LabController {
         return next(ApiError.notFound('Лабораторная работа не найдена'));
       }
       await lab.destroy();
-      return res.json({ message: "Лаба успешно удалена" });
+      return res.json({ message: "Лабораторная работа успешно удалена" });
     } catch (error) {
       next(ApiError.internal('Ошибка при удалении лабораторной работы'));
     }

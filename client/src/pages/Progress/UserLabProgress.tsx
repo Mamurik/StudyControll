@@ -9,7 +9,7 @@ const UserLabProgress: React.FC = () => {
   const username = useSelector((state: RootState) => state.user.user?.username);
 
   const {
-    data: userProgress = [],
+    data: userLabProgress = [],
     isLoading,
     error,
   } = useGetUserLabProgressQuery(userId as number, { skip: !userId });
@@ -34,18 +34,35 @@ const UserLabProgress: React.FC = () => {
   }
 
   return (
-    <div className={classes.container}>
-      <h1 className={classes.progress_h1}>Прогресс пользователя: {username}</h1>
-      {userProgress.map((progress: IUserLabProgress) => (
-        <div className={classes.progress_List} key={progress.id}>
-          <h2 className={classes.progress_h2}>
-            Лабораторная работа ID: {progress.labId}
-          </h2>
-          <h3 className={classes.progress_h3}>
-            Статус (0-5): {progress.status}
-          </h3>
-        </div>
-      ))}
+    <div>
+      <h2>Прогресс по лабораторным работам</h2>
+      {userLabProgress && userLabProgress.length > 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Название предмета</th>
+              <th>Номер лабораторной</th>
+              <th>Макс. баллы</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userLabProgress.map((progress: IUserLabProgress) => (
+              <tr key={progress.id}>
+                <td>{progress.lab?.subject?.name || "Без предмета"}</td>
+                <td>{progress.lab?.lab_number || "N/A"}</td>
+                <td>{progress.lab?.max_points || "N/A"}</td>
+                <td>
+                  <input type="range" min="0" max="5" />
+                  {progress.status}/5
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>Данные по лабораторным работам не найдены.</p>
+      )}
     </div>
   );
 };

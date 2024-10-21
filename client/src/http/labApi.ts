@@ -1,4 +1,4 @@
-// api/userLabProgressApi.ts
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ILab } from '../API/api';
 
