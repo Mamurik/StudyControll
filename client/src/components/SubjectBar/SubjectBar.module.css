@@ -1,0 +1,53 @@
+
+  .subjectBar_list {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    list-style: none;
+    padding: 0;
+    margin: 20px 0px;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .subjectBar_item {
+    background-color: #007bff;
+    width:100px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .subjectBar_item:hover {
+    background-color: #0056b3;
+  }
+  
+  .subjectBar_item.selected {
+    background-color: #28a745; 
+  }
+  
+  .subjectBar_item:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  @media (max-width: 768px) {
+    
+    .subjectBar_list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .subjectBar_item {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  @media (max-width: 1600px) {
+    .subjectBar_item{
+        display: inline-block;
+    }
+  }
