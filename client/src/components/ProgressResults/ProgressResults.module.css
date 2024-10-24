@@ -1,0 +1,45 @@
+.progress_results {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px auto; 
+    padding: 20px; 
+    text-align: center;
+}
+
+.progress_results_p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333; 
+    padding: 10px 0; 
+}
+
+.progress_results_inpt {
+    width: 100%;
+    margin: 10px 0;
+    appearance: none; 
+    height: 8px; 
+    border-radius: 5px; 
+    background: #ddd; 
+    outline: none; 
+}
+
+.progress_results_inpt::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%; 
+    background: #4caf50; 
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+.progress_results_inpt::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4caf50;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}

@@ -9,7 +9,14 @@ export const userLabProgressApi = createApi({
     getUserLabProgress: builder.query<IUserLabProgress[], number>({ 
       query: (userId) => `api/userLabProgress/${userId}`,  
     }),
+    updateUserLabProgress: builder.mutation<IUserLabProgress[], { id: number; status: number }>({
+      query: ({ id, status }) => ({
+        url: `api/userLabProgress/${id}`,
+        method: 'PUT', 
+        body: { status },
+      }),
+    }),
   }),
 });
 
-export const { useGetUserLabProgressQuery } = userLabProgressApi;
+export const { useGetUserLabProgressQuery,useUpdateUserLabProgressMutation } = userLabProgressApi;
