@@ -9,6 +9,7 @@ import {
   USERLABPROGRESS_ROUTE,
 } from "../../utils/consts";
 import classes from "./Auth.module.css";
+import AuthInput from "../../components/UI/AuthInput/AuthInput";
 
 const Auth = () => {
   const location = useLocation();
@@ -42,22 +43,18 @@ const Auth = () => {
         {isLogin ? "Авторизация" : "Регистрация"}
       </h2>
       <form className={classes.Auth_form}>
-        <input
-          className={classes.Auth_inpt}
-          type="text"
-          placeholder="Введите ваш username..."
-          value={username}
+        <AuthInput
           onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          className={classes.Auth_inpt}
-          type="password"
-          placeholder="Введите ваш пароль..."
+          type="text"
+          value={username}
+          placeholder="Username"
+        ></AuthInput>
+        <AuthInput
           value={password}
+          type="password"
+          placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        ></AuthInput>
         <div className={classes.linkContainer}>
           {isLogin ? (
             <div>

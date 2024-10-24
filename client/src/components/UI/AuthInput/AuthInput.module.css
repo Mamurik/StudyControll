@@ -1,0 +1,42 @@
+ 
+  .Auth_inpt_login {
+    margin-bottom: 1rem; 
+    padding: 0.75rem; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    transition: border-color 0.3s; 
+    background: url(../../../../public//assets/Username.svg) no-repeat;
+    background-position: right 0.75rem center; 
+    background-size: 12px; 
+    width: 100%;
+}
+.Auth_inpt_login::placeholder{
+  color: #949292;
+  text-align:start;
+   
+}
+  .Auth_inpt_login:focus {
+    border-color: #985ACE; 
+    outline: none; 
+  }
+
+  .Auth_inpt_password {
+    margin-bottom: 1rem; 
+    padding: 0.75rem; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    transition: border-color 0.3s; 
+    background: url(../../../../public//assets/Password.png) no-repeat;
+    background-position: right 0.50rem center; 
+    background-size: 20px; 
+    width: 100%;
+}
+.Auth_inpt_password::placeholder{
+  color: #949292;
+  text-align:start;
+   
+}
+  .Auth_inpt_password:focus {
+    border-color: #985ACE; 
+    outline: none; 
+  }

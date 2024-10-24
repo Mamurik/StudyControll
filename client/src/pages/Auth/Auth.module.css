@@ -2,7 +2,7 @@
 .authContainer {
     max-width: 400px;
     margin: 2rem auto; 
-    padding: 2rem;
+    padding: 3rem;
     border-radius: 10px; 
     background-color: #ffffff; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -16,40 +16,23 @@
   .Auth_h2 {
     text-align: center; 
     margin-bottom: 1.5rem;
-    color: #4a90e2; 
+    color: #985ACE; 
   }
-  
-  .Auth_form {
-    display: flex; 
-    flex-direction: column; 
-  }
-  
-  .Auth_inpt {
-    margin-bottom: 1rem; 
-    padding: 0.75rem; 
-    border: 1px solid #ccc;
-    border-radius: 5px; 
-    transition: border-color 0.3s; 
-  }
-  
-  .Auth_inpt:focus {
-    border-color: #4a90e2; 
-    outline: none; 
-  }
-  
+
   .Auth_Button {
     margin-top: 10px;
     padding: 0.75rem; 
-    background-color: #4a90e2; 
+    background-color: #985ACE; 
     color: white; 
     border: none; 
     border-radius: 5px; 
     cursor: pointer; 
     transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
   }
   
   .Auth_Button:hover {
-    background-color: #357abf; 
+    background-color: #985ACE; 
     transform: scale(1.05); 
   }
   
@@ -59,10 +42,16 @@
     margin-top: 1rem; 
   }
   .reg_link{
-    color: #4a90e2;
+    color: #291be8;
     transition: 0.3s;
   }
   .reg_link:hover{
     opacity: 0.8;
     transition: 0.3s;
+  }
+
+  @media (max-width:768px) {
+    .authContainer{
+      width: 340px;
+    }
   }
