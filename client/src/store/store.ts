@@ -7,6 +7,7 @@ import UserReducer from './Slices/userSlice';
 import { subjectApi } from '../http/subjectApi';
 import { userLabProgressApi } from '../http/userLabProgressApi';
 import { labApi } from '../http/labApi';
+import burgerSlice from './Slices/burgerSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,9 +15,11 @@ export const store = configureStore({
     lab: labSlice,
     subject: subjectSlice,
     progress: userLabProgressSlice,
+    burger:burgerSlice,
     [subjectApi.reducerPath]: subjectApi.reducer, 
     [userLabProgressApi.reducerPath]: userLabProgressApi.reducer,
-    [labApi.reducerPath]:labApi.reducer
+    [labApi.reducerPath]:labApi.reducer,
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

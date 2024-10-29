@@ -1,79 +1,91 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #4a90e2; 
-    color: white; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+  background-color: #1B1B1B;
+  color: white; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s; 
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list_item {
+  margin-left: 1.5rem; 
+}
+
+.list_item_but {
+  padding: 0.5rem 1rem;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; 
+}
+
+.list_item_but:hover {
+  background-color: rgba(255, 255, 255, 0.2); 
+  transform: scale(1.05); 
+}
+
+.list_item_link {
+  font-size: 20px;
+  color: white; 
+  text-decoration: none; 
+  font-weight: bold; 
+  transition: color 0.3s; 
+  margin-left: 10px; /* Изменено для отступа от кнопки бургер */
+}
+
+.list_item_link:hover {
+  color: rgba(255, 255, 255, 0.8); 
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; 
+    align-items: flex-start; 
   }
-  
-  .navbar:hover {
-    background-color: #357abf; 
-  }
-  
+
   .list {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    flex-direction: column; 
+    width: 100%; 
   }
-  
+
   .list_item {
-    margin-left: 1.5rem; 
+    margin-left: 0; 
+    width: 100%; 
   }
   
   .list_item_but {
-    padding: 0.5rem 1rem;
-    font-size: 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s; 
-  }
-  
-  .list_item_but:hover {
-    background-color: rgba(255, 255, 255, 0.2); 
-    transform: scale(1.05); 
+    font-size: 16px;
   }
   
   .list_item_link {
-    font-size: 20px;
-    color: white; 
-    text-decoration: none; 
-    font-weight: bold; 
-    transition: color 0.3s; 
-    margin-right: 50px;
+    margin-right: 20px;
+    font-size: 16px;
   }
-  
-  .list_item_link:hover {
-    color: rgba(255, 255, 255, 0.8); 
-  }
-  
-  @media (max-width: 768px) {
-    .navbar {
-      flex-direction: column; 
-      align-items: flex-start; 
-    }
-  
-    .list {
-      flex-direction: column; 
-      width: 100%; 
-    }
-  
-    .list_item {
-      margin-left: 0; 
-      width: 100%; 
-    }
-    .list_item_but{
-        font-size: 16px;
-    }
-    .list_item_link{
-      margin-right: 20px;
-      font-size: 16px;
-    }
-  }
-  
+}
+
+.burgerButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 24px; 
+  transition: transform 0.2s, color 0.3s; 
+}
+
+.burgerButton:hover {
+  transform: scale(1.1);
+  color: rgba(255, 255, 255, 0.8); 
+}

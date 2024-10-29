@@ -6,3 +6,6 @@ export const REGISTRATION_ROUTE:string = "/registration"
 export const LOGIN_ROUTE:string = "/login"
 export const SUBJECTS_ROUTE:string = "/subjects"
 export const LAB_ROUTE:string = "/lab"
+
+
+export const MAIN_ROUTE:string='/main'

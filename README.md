@@ -2,26 +2,27 @@
 
 ## Описание
 
-**StudyControll** — это web-приложение для контроля за успеваемостью
+**StudyControll** — это веб-приложение для контроля успеваемости студентов, позволяющее отслеживать прогресс и достижения в обучении.
 
 ## Используемые технологии
 
-## Frontend
+### Frontend
 
-- **React + Typescript**
-- **Redux(RTK)**
-- **RTK query**
-- **Axios**
-- **Сборщик WebPack**
+- [![React](https://img.icons8.com/color/48/000000/react-native.png)](https://reactjs.org/) **React + Typescript**
+- [![Redux](https://img.icons8.com/color/48/000000/redux.png)](https://redux.js.org/) **Redux (RTK)**
+- [![RTK Query](https://img.icons8.com/color/48/000000/redux.png)](https://redux-toolkit.js.org/rtk-query/overview) **RTK Query**
+- [![Axios](https://img.icons8.com/color/48/000000/api-settings.png)](https://axios-http.com/) **Axios**
+- [![Webpack](https://img.icons8.com/color/48/000000/webpack.png)](https://webpack.js.org/) **Сборщик WebPack**
 
-## Backend
+### Backend
 
-- **NodeJs**
-- **ExpressJs**
-- **PostgreSQL**
-- **JsonWebToken auth**
+- [![Node.js](https://img.icons8.com/color/48/000000/nodejs.png)](https://nodejs.org/) **Node.js**
+- [![Express](https://img.icons8.com/color/48/000000/express.png)](https://expressjs.com/) **Express.js**
+- ![PostgreSQL](https://img.icons8.com/color/48/000000/postgreesql.png) **PostgreSQL**
 
-##PostMan для http запросов
+## PostMan для http запросов
+
+[![Postman](https://img.icons8.com/color/48/000000/postman.png)](https://www.postman.com/) **Postman**
 
 ## Запуск приложения
 
@@ -32,7 +33,7 @@
    ```
 
 2. Для запуска Frontend:
-   `bash
-    npm start
-    `
-   Приложение будет доступно по адресу [http://localhost:3000].
+
+   ```bash
+   npm start
+   ```
