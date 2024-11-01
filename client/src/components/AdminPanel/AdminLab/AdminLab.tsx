@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import SubjectModal from "./SubjectModal/SubjectModal";
-import classes from "./AdminSubject.module.css";
-const AdminSubject = () => {
+import LabModal from "./LabModal/LabModal";
+import classes from "./AdminLab.module.css";
+const AdminLab = () => {
   const [modal, setModal] = useState<boolean>(false);
 
   const toggleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -11,12 +11,12 @@ const AdminSubject = () => {
 
   return (
     <div className={modal ? classes.openModal : classes.closeModal}>
-      <SubjectModal setModal={setModal} modal={modal}></SubjectModal>
+      <LabModal modal={modal} setModal={setModal}></LabModal>
       <button className={classes.button} onClick={toggleModal}>
-        Модальное окно для предметов
+        Модальное окно для Лаб
       </button>
     </div>
   );
 };
 
-export default AdminSubject;
+export default AdminLab;

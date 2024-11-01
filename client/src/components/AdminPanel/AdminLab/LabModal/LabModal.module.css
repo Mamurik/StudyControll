@@ -1,0 +1,164 @@
+.openModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .closeModal {
+    display: none;
+  }
+  
+  .icon {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      cursor: pointer;
+      color: #2e2e2e;
+      padding: 2px 4px;
+      transition: color 0.3s;
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    
+    .icon:hover {
+      transition: 0.3s;
+      transform: scale(1.1);
+      color: #1f1f1f; 
+    }
+  .modal_container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    animation: slideIn 0.3s ease-in-out;
+    position: relative;
+  }
+  
+  .modal_input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+  
+  .modal_input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .modal_but {
+    background: #454545;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .modal_but:hover {
+    background: #2e2e2e;
+  }
+  
+  .lab_list {
+    margin-top: 20px;
+    width: 30%;
+    max-height: 400px; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    background: #2e2e2e; 
+  }
+  
+  .lab_list_ul {
+    list-style-type: none;
+  padding: 0; 
+  }
+  
+  .lab_list_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .lab_list_item:last-child {
+    border-bottom: none; 
+  }
+  
+  .lab_list_item:hover {
+    background: #f7f7f7;
+    color: black;
+  }
+  
+  .lab_list_item button {
+    background: #424a5b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .lab_list_item button:hover {
+    background: #638ce3;
+  }
+  
+  
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @media (max-width: 600px) {
+      .modal_container {
+        width: 95%; 
+        padding: 15px;
+      }
+    
+      .icon {
+        font-size: 20px; 
+      }
+    
+      .modal_input,
+      .modal_but {
+        padding: 8px; 
+      }
+    
+      .subject_list {
+        width: 100%; 
+      }
+    }

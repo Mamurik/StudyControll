@@ -18,15 +18,20 @@
 
 .icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 4px;
+    right: 4px;
     cursor: pointer;
-    color: #2e2e2e; 
-    font-size: 24px;
+    color: #2e2e2e;
+    padding: 2px 4px;
     transition: color 0.3s;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 50%;
+    transition: 0.3s;
   }
   
   .icon:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
     color: #1f1f1f; 
   }
 .modal_container {

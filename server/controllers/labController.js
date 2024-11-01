@@ -23,7 +23,7 @@ class LabController {
       const labs = await Lab.findAll({
         include: [{
           model: Subject,
-          attributes: ['name', 'total_labs'] // Включаем название предмета и количество лабораторных
+          attributes: ['name', 'total_labs'] 
         }]
       });
       return res.json(labs);
@@ -39,7 +39,7 @@ class LabController {
         where: { id },
         include: [{
           model: Subject,
-          attributes: ['name', 'total_labs'] // Включаем название предмета и количество лабораторных
+          attributes: ['name', 'total_labs'] 
         }]
       });
       if (!labById) {

@@ -1,13 +1,10 @@
+import AdminLab from "../../components/AdminPanel/AdminLab/AdminLab";
 import AdminSubject from "../../components/AdminPanel/AdminSubject/AdminSubject";
 
 const Admin = () => {
   return (
     <div>
-      <div>
-        <button>Добавить Лабу</button>
-        <button>Удалить Лабу</button>
-        <button>Редактировать Лабу</button>
-      </div>
+      <AdminLab></AdminLab>
       <AdminSubject></AdminSubject>
     </div>
   );
