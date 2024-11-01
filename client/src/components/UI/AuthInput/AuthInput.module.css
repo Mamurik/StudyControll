@@ -16,7 +16,7 @@
    
 }
   .Auth_inpt_login:focus {
-    border-color: #985ACE; 
+    border-color: #1B1B1B; 
     outline: none; 
   }
 
@@ -37,6 +37,6 @@
    
 }
   .Auth_inpt_password:focus {
-    border-color: #985ACE; 
+    border-color: #1B1B1B; 
     outline: none; 
   }

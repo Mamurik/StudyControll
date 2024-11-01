@@ -4,7 +4,7 @@
     margin: 2rem auto; 
     padding: 3rem;
     border-radius: 10px; 
-    background-color: #ffffff; 
+    background-color: rgb(246, 246, 246); 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease; 
   }
@@ -16,13 +16,13 @@
   .Auth_h2 {
     text-align: center; 
     margin-bottom: 1.5rem;
-    color: #985ACE; 
+    color: #1B1B1B; 
   }
 
   .Auth_Button {
     margin-top: 10px;
     padding: 0.75rem; 
-    background-color: #985ACE; 
+    background-color: #1B1B1B; 
     color: white; 
     border: none; 
     border-radius: 5px; 
@@ -32,8 +32,7 @@
   }
   
   .Auth_Button:hover {
-    background-color: #985ACE; 
-    transform: scale(1.05); 
+    background-color: #454545; 
   }
   
   .linkContainer {
@@ -42,7 +41,7 @@
     margin-top: 1rem; 
   }
   .reg_link{
-    color: #291be8;
+    color: rgb(128, 127, 128);
     transition: 0.3s;
   }
   .reg_link:hover{

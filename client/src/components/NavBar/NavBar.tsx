@@ -12,12 +12,14 @@ import classes from "./NavBar.module.css";
 import UserBurger from "../UserBurger/UserBurger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useRef } from "react";
 
 const NavBar = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isOpen = useSelector((state: RootState) => state.burger.isOpen);
+  const userBurgerRef = useRef<HTMLDivElement | null>(null); // Создаем реф для UserBurger
 
   const handleLogout = () => {
     dispatch(logout());
@@ -27,12 +29,35 @@ const NavBar = () => {
     dispatch(setIsOpen(!isOpen));
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      userBurgerRef.current &&
+      !userBurgerRef.current.contains(event.target as Node) &&
+      isOpen
+    ) {
+      dispatch(setIsOpen(false));
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <div>
       <nav className={classes.navbar}>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div className={classes.navbar_left}>
           <button onClick={toggleBurger} className={classes.burgerButton}>
-            <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+            <FontAwesomeIcon
+              className={
+                isOpen ? classes.burger_icon_close : classes.burger_icon
+              }
+              icon={faBars}
+            />
           </button>
           <Link className={classes.list_item_link} to={USERLABPROGRESS_ROUTE}>
             StudyControll
@@ -69,7 +94,9 @@ const NavBar = () => {
           </ul>
         )}
       </nav>
-      <UserBurger />
+      <div ref={userBurgerRef}>
+        <UserBurger />
+      </div>
     </div>
   );
 };

@@ -1,8 +1,7 @@
 .progress_results {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    margin: 20px auto; 
+    flex-direction: column; 
     padding: 20px; 
     text-align: center;
 }
@@ -10,7 +9,7 @@
 .progress_results_p {
     font-size: 20px;
     font-weight: 500;
-    color: #333; 
+    color: #fff; 
     padding: 10px 0; 
 }
 
@@ -30,7 +29,7 @@
     width: 20px; 
     height: 20px; 
     border-radius: 50%; 
-    background: #4caf50; 
+    background: #606060; 
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }

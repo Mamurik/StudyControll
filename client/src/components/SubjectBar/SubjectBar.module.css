@@ -9,7 +9,7 @@
     flex-wrap: wrap;
   }
   .subjectBar_item {
-    background-color: #007bff;
+    background-color: #2e2e2e;
     width:100px;
     text-align: center;
     color: #fff;
@@ -23,11 +23,11 @@
   }
   
   .subjectBar_item:hover {
-    background-color: #0056b3;
+    background-color: #6a6a6a;
   }
   
   .subjectBar_item.selected {
-    background-color: #28a745; 
+    background-color: #47a96d; 
   }
   
   .subjectBar_item:focus {

@@ -26,7 +26,6 @@ const ProgressTable: FC<ProgressTableProps> = ({
       </h2>
       <h2 className={classes.container_h2}>
         {selectedSubject ? "По предмету " + selectedSubject.name : "Все "}
-        {""}
         {selectedSubject ? " " + selectedSubject.total_labs + " Лаб" : "Лабы"}
       </h2>
       {filteredLabProgress.length > 0 ? (
@@ -63,7 +62,7 @@ const ProgressTable: FC<ProgressTableProps> = ({
                     }
                     disabled={isUpdateLoading}
                     style={{
-                      backgroundColor: getBackgroundColor(progress.status),
+                      color: getBackgroundColor(progress.status),
                     }}
                   />
                 </td>

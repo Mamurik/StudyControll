@@ -4,10 +4,12 @@ import { RootState } from "../../store/store";
 import {
   setSelectedSubject,
   setSubjects,
+  clearSelectedSubject,
 } from "../../store/Slices/subjectSlice";
 import { ISubject } from "../../API/api";
 import classes from "./SubjectBar.module.css";
 import { useGetSubjectsQuery } from "../../http/subjectApi";
+
 const SubjectBar = () => {
   const dispatch = useDispatch();
   const subjects = useSelector((state: RootState) => state.subject.subjects);
@@ -16,6 +18,7 @@ const SubjectBar = () => {
   const selectedSubject = useSelector(
     (state: RootState) => state.subject.selectedSubject
   );
+
   useEffect(() => {
     if (dataSubjects) {
       dispatch(setSubjects(dataSubjects));
@@ -23,7 +26,11 @@ const SubjectBar = () => {
   }, [dataSubjects, dispatch]);
 
   const handleSelectSubject = (subject: ISubject) => {
-    dispatch(setSelectedSubject(subject));
+    if (selectedSubject?.id === subject.id) {
+      dispatch(clearSelectedSubject());
+    } else {
+      dispatch(setSelectedSubject(subject));
+    }
   };
 
   return (
@@ -44,4 +51,5 @@ const SubjectBar = () => {
     </div>
   );
 };
+
 export default SubjectBar;

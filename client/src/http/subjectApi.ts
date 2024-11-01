@@ -8,7 +8,28 @@ export const subjectApi = createApi({
     getSubjects: builder.query<ISubject[] , void>({
       query: () => 'api/subject',  
     }),
+    addSubject: builder.mutation<ISubject,ISubject>({
+      query:(body)=>({
+        method:'POST',
+        url:'api/subject',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        body
+      })
+    }),
+    removeSubject:builder.mutation<ISubject,number>({
+      query:(subjectId)=>({
+        method:"DELETE",
+        url:`api/subject/${subjectId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+      })
+    }),
   }),
 });
 
-export const { useGetSubjectsQuery } = subjectApi;
+export const { useGetSubjectsQuery,useAddSubjectMutation, useRemoveSubjectMutation} = subjectApi;

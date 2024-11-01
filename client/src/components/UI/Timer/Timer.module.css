@@ -1,0 +1,47 @@
+.timer_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #282c34;
+    padding:30px 40px ;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #aee2f0;
+    max-width:250px; 
+    margin: 0 auto; 
+    transition: background-color 0.3s ease;
+    margin: 15px 0px;
+  }
+  
+  .timer_container:hover {
+    background-color: #3a3f47;
+  }
+  .timer_h1 {
+    font-size:34px; 
+    margin: 0;
+    padding-bottom: 5px;
+  }
+  
+  .timer_h2 {
+    font-size: 16px; 
+  }
+  .days_left{
+    font-size: 16яpx;
+    margin: 10px 0px;
+  }
+  
+  @media (max-width: 768px) {
+    .timer_h1 {
+      font-size: 24px; 
+    }
+  
+    .timer_h2 {
+      font-size: 12px; 
+    }
+    .days_left {
+        font-size: 12px; 
+      }
+  }
+  
+  

@@ -10,7 +10,7 @@ const User = sequelize.define("user", {
 
 const Subject = sequelize.define("subject", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, unique: true },
+    name: { type: DataTypes.STRING, unique: true},
     total_labs: { type: DataTypes.INTEGER },
 })
 

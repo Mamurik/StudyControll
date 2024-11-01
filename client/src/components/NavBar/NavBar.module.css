@@ -9,7 +9,10 @@
   transition: background-color 0.3s; 
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
-
+.navbar_left{
+  display: flex;
+  align-items: center;
+}
 .list {
   display: flex;
   list-style: none;
@@ -43,7 +46,7 @@
   text-decoration: none; 
   font-weight: bold; 
   transition: color 0.3s; 
-  margin-left: 10px; /* Изменено для отступа от кнопки бургер */
+  margin-left: 10px;
 }
 
 .list_item_link:hover {
@@ -88,4 +91,10 @@
 .burgerButton:hover {
   transform: scale(1.1);
   color: rgba(255, 255, 255, 0.8); 
+}
+.burger_icon{
+display: block;
+}
+.burger_icon_close{
+display: none;
 }
