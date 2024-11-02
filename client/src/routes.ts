@@ -10,12 +10,13 @@ export interface IRoute {
   path: string;
   element: React.ComponentType; 
 }
-
-export const privateRoutes: IRoute[] = [
+export const adminRoutes: IRoute[] = [
   {
     path: ADMIN_ROUTE,
     element: Admin,
   },
+]
+export const privateRoutes: IRoute[] = [
   {
     path:USERLABPROGRESS_ROUTE,
     element:UserLabProgress

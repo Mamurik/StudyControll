@@ -6,6 +6,9 @@ import { getBackgroundColor } from "../../utils/funcs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleDown,
+  faArrowDownUpAcrossLine,
+  faArrowDownUpLock,
+  faArrowsUpDown,
   faArrowUpWideShort,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
@@ -58,9 +61,9 @@ const ProgressTable: FC<ProgressTableProps> = ({
               <th className={classes.progress_th}>
                 Номер лабораторной
                 <FontAwesomeIcon
-                  icon={faArrowAltCircleDown}
+                  icon={faArrowsUpDown}
                   onClick={handleSort}
-                  style={{ cursor: "pointer" }}
+                  className={classes.icon}
                 />
               </th>
               <th className={classes.progress_th}>Макс. баллы</th>
