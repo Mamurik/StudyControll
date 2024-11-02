@@ -5,29 +5,66 @@ import ProgressResults from "../../components/ProgressResults/ProgressResults";
 import ProgressTable from "../../components/ProgressTable/ProgressTable";
 import Loader from "../../components/UI/Loader/Loader";
 import {
+  useAddUserLabProgressMutation,
   useGetUserLabProgressQuery,
+  useRemoveUserLabProgressMutation,
   useUpdateUserLabProgressMutation,
 } from "../../http/userLabProgressApi";
 import { RootState } from "../../store/store";
 import classes from "./UserLabProgres.module.css";
+import { setUserLabProgress } from "../../store/Slices/userLabProgressSlice";
+import { useDispatch } from "react-redux";
+
 const UserLabProgress: React.FC = () => {
-  const userId = useSelector((state: RootState) => state.user.user?.id);
+  const dispatch = useDispatch();
+  const idOfUser = useSelector((state: RootState) => state.user.user?.id);
   const username = useSelector((state: RootState) => state.user.user?.username);
   const selectedSubject = useSelector(
     (state: RootState) => state.subject.selectedSubject
   );
-
+  const [addLabProgress, { isLoading: isAddingLabProgress }] =
+    useAddUserLabProgressMutation();
   const {
     data: userLabProgress = [],
     isLoading,
     error,
-  } = useGetUserLabProgressQuery(userId as number, { skip: !userId });
-
+    refetch,
+  } = useGetUserLabProgressQuery(idOfUser as number, { skip: !idOfUser });
   const [updateStatus, { isLoading: isUpdateLoading }] =
     useUpdateUserLabProgressMutation();
-
+  const [removeLabProgress, { isLoading: isRemovingLabProgress }] =
+    useRemoveUserLabProgressMutation();
   const [localProgress, setLocalProgress] =
     useState<IUserLabProgress[]>(userLabProgress);
+
+  const [input, setInput] = useState<number>(0);
+  const handleAdd = async () => {
+    if (!idOfUser) return;
+    try {
+      const newProgress: IUserLabProgress = {
+        id: Date.now(),
+        status: 0,
+        labId: input,
+        userId: idOfUser,
+      };
+      const result = await addLabProgress(newProgress).unwrap();
+      dispatch(setUserLabProgress([...userLabProgress, result]));
+      setLocalProgress((prevProgress) => [...prevProgress, result]);
+      setInput(0);
+      await refetch();
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
+  const handleRemove = async (labProgressId: number) => {
+    try {
+      await removeLabProgress(labProgressId).unwrap();
+      refetch();
+    } catch (error) {
+      console.error("Ошибка при удалении:", error);
+    }
+  };
 
   useEffect(() => {
     if (userLabProgress.length) {
@@ -45,11 +82,11 @@ const UserLabProgress: React.FC = () => {
         )
       );
     } catch (err) {
-      console.error("Failed to update the lab progress", err);
+      console.error("Ошибка обновления", err);
     }
   };
 
-  if (!userId) {
+  if (!idOfUser) {
     return (
       <div>Пожалуйста, войдите в систему, чтобы увидеть свой прогресс.</div>
     );
@@ -76,9 +113,14 @@ const UserLabProgress: React.FC = () => {
         (progress) => progress.lab?.subject?.name === selectedSubject.name
       )
     : localProgress;
+
   return (
     <div className={classes.main_container}>
       <ProgressTable
+        handleRemove={handleRemove}
+        input={input}
+        setInput={setInput}
+        handleAdd={handleAdd}
         handleStatusChange={handleStatusChange}
         filteredLabProgress={filteredLabProgress}
         isUpdateLoading={isUpdateLoading}

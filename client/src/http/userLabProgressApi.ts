@@ -16,7 +16,20 @@ export const userLabProgressApi = createApi({
         body: { status },
       }),
     }),
+    addUserLabProgress: builder.mutation<IUserLabProgress,IUserLabProgress>({
+      query:(body)=>({
+        url:`api/userLabProgress/`,
+        method:"POST",
+        body
+      })
+    }),
+    removeUserLabProgress:builder.mutation<IUserLabProgress,number>({
+      query:(labProgressId)=>({
+        url: `api/userLabProgress/${labProgressId}`,
+        method:'DELETE'
+      })
+    })
   }),
 });
 
-export const { useGetUserLabProgressQuery,useUpdateUserLabProgressMutation } = userLabProgressApi;
+export const { useGetUserLabProgressQuery,useUpdateUserLabProgressMutation,useAddUserLabProgressMutation,useRemoveUserLabProgressMutation } = userLabProgressApi;

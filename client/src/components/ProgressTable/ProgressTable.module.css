@@ -7,6 +7,18 @@
   padding: 20px;
   color: #fff;
 }
+.addContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.add_Input{
+  border-radius: 10px;
+  padding: 4px; 
+  font-size: 16px;
+  font-weight: 600;
+}
 
 .container_h2 {
   text-align: center;
@@ -33,7 +45,7 @@
   font-size: 16px;
   font-weight: 800;
 }
-.progress_td:last-child{
+.progress_td:nth-child(4){
   padding: 0px;
   margin: 0px;
 }
@@ -49,6 +61,29 @@
   float: right;
   text-align: center;
   margin-top: 4px;
+  transition: 0.2s;
+}
+.AddIcon{
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  margin-left: 20px;
+  border: 1px solid white;
+  padding: 4px;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+.removeIcon{
+  text-align: center;
+  border: 1px solid white;
+  padding: 2px 4px;
+  border-radius: 50%;
+  
+}
+.icon:hover, .AddIcon:hover, .removeIcon:hover {
+  transition: 0.2s;
+  transform: scale(1.1);
 }
 .status_input{
   background: #606060;

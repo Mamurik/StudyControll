@@ -18,6 +18,8 @@ const Lab: React.FC = () => {
   useEffect(() => {
     if (lab && !labError) {
       setLastLab(lab);
+    } else if (labError) {
+      setLastLab(null);
     }
   }, [lab, labError]);
 
@@ -44,7 +46,7 @@ const Lab: React.FC = () => {
         placeholder="Введите ID лабораторной работы"
       />
       {(labLoading || subjectsLoading) && <div>Загрузка...</div>}
-      {labError && <div>Ошибка</div>}{" "}
+      {labError && <div>Ошибка: Лабораторная работа не найдена</div>}
       {lastLab && (
         <div className={classes.lab_List}>
           <h2 className={classes.lab_h2}>
@@ -56,7 +58,7 @@ const Lab: React.FC = () => {
           </h3>
           <h3 className={classes.lab_h3}>
             Предмет: {subjectName || "Не найден"}
-          </h3>{" "}
+          </h3>
         </div>
       )}
     </div>

@@ -1,17 +1,15 @@
+import {
+  faArrowsUpDown,
+  faMinus,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { FC, useState } from "react";
-import SubjectBar from "../SubjectBar/SubjectBar";
-import classes from "./ProgressTable.module.css";
 import { ISubject, IUserLabProgress } from "../../API/api";
 import { getBackgroundColor } from "../../utils/funcs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowAltCircleDown,
-  faArrowDownUpAcrossLine,
-  faArrowDownUpLock,
-  faArrowsUpDown,
-  faArrowUpWideShort,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import SubjectBar from "../SubjectBar/SubjectBar";
+import classes from "./ProgressTable.module.css";
+import AuthInput from "../UI/AuthInput/AuthInput";
 
 interface ProgressTableProps {
   username: string | undefined;
@@ -19,6 +17,10 @@ interface ProgressTableProps {
   filteredLabProgress: IUserLabProgress[];
   isUpdateLoading: boolean;
   handleStatusChange: (id: number, e: number) => void;
+  handleAdd: () => void;
+  handleRemove: (id: number) => void;
+  input: number;
+  setInput: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const ProgressTable: FC<ProgressTableProps> = ({
@@ -27,17 +29,20 @@ const ProgressTable: FC<ProgressTableProps> = ({
   filteredLabProgress,
   isUpdateLoading,
   handleStatusChange,
+  handleAdd,
+  handleRemove,
+  input,
+  setInput,
 }) => {
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc"); // Состояние для порядка сортировки
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const handleSort = () => {
     setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
-  // Функция сортировки лабораторных работ
   const sortedLabProgress = [...filteredLabProgress].sort((a, b) => {
-    const labANumber = a.lab?.lab_number || 0; // Получаем номер лабораторной A
-    const labBNumber = b.lab?.lab_number || 0; // Получаем номер лабораторной B
+    const labANumber = a.lab?.lab_number || 0;
+    const labBNumber = b.lab?.lab_number || 0;
     return sortOrder === "asc"
       ? labANumber - labBNumber
       : labBNumber - labANumber;
@@ -53,6 +58,22 @@ const ProgressTable: FC<ProgressTableProps> = ({
         {selectedSubject ? "По предмету " + selectedSubject.name : "Все "}
         {selectedSubject ? " " + selectedSubject.total_labs + " Лаб" : "Лабы"}
       </h2>
+      <div className={classes.addContainer}>
+        <input
+          className={classes.add_Input}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setInput(Number(e.target.value))
+          }
+          placeholder="Айди лабы"
+          value={input.toString()}
+          type="number"
+        />
+        <FontAwesomeIcon
+          onClick={handleAdd}
+          className={classes.AddIcon}
+          icon={faPlus}
+        ></FontAwesomeIcon>
+      </div>
       {sortedLabProgress.length > 0 ? (
         <table className={classes.progress_table}>
           <thead className={classes.progress_thead}>
@@ -97,6 +118,13 @@ const ProgressTable: FC<ProgressTableProps> = ({
                       color: getBackgroundColor(progress.status),
                     }}
                   />
+                </td>
+                <td className={classes.progress_td}>
+                  <FontAwesomeIcon
+                    className={classes.removeIcon}
+                    icon={faMinus}
+                    onClick={() => handleRemove(progress.id)}
+                  ></FontAwesomeIcon>
                 </td>
               </tr>
             ))}
