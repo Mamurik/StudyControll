@@ -1,8 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import SubjectBar from "../SubjectBar/SubjectBar";
 import classes from "./ProgressTable.module.css";
 import { ISubject, IUserLabProgress } from "../../API/api";
 import { getBackgroundColor } from "../../utils/funcs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowAltCircleDown,
+  faArrowsUpDown,
+  faArrowUpWideShort,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface ProgressTableProps {
   username: string | undefined;
@@ -11,6 +18,7 @@ interface ProgressTableProps {
   isUpdateLoading: boolean;
   handleStatusChange: (id: number, e: number) => void;
 }
+
 const ProgressTable: FC<ProgressTableProps> = ({
   username,
   selectedSubject,
@@ -18,6 +26,20 @@ const ProgressTable: FC<ProgressTableProps> = ({
   isUpdateLoading,
   handleStatusChange,
 }) => {
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
+  const handleSort = () => {
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+  };
+
+  const sortedLabProgress = [...filteredLabProgress].sort((a, b) => {
+    const labANumber = a.lab?.lab_number || 0;
+    const labBNumber = b.lab?.lab_number || 0;
+    return sortOrder === "asc"
+      ? labANumber - labBNumber
+      : labBNumber - labANumber;
+  });
+
   return (
     <div className={classes.container}>
       <SubjectBar />
@@ -28,18 +50,25 @@ const ProgressTable: FC<ProgressTableProps> = ({
         {selectedSubject ? "По предмету " + selectedSubject.name : "Все "}
         {selectedSubject ? " " + selectedSubject.total_labs + " Лаб" : "Лабы"}
       </h2>
-      {filteredLabProgress.length > 0 ? (
+      {sortedLabProgress.length > 0 ? (
         <table className={classes.progress_table}>
           <thead className={classes.progress_thead}>
             <tr className={classes.progress_tr}>
               <th className={classes.progress_th}>Название предмета</th>
-              <th className={classes.progress_th}>Номер лабораторной</th>
+              <th className={classes.progress_th}>
+                Номер лабораторной
+                <FontAwesomeIcon
+                  icon={faArrowsUpDown}
+                  onClick={handleSort}
+                  className={classes.icon}
+                />
+              </th>
               <th className={classes.progress_th}>Макс. баллы</th>
               <th className={classes.progress_th}>Статус</th>
             </tr>
           </thead>
           <tbody className={classes.progress_tbody}>
-            {filteredLabProgress.map((progress: IUserLabProgress) => (
+            {sortedLabProgress.map((progress: IUserLabProgress) => (
               <tr className={classes.progress_tr} key={progress.id}>
                 <td className={classes.progress_td}>
                   {progress.lab?.subject?.name || "Без предмета"}

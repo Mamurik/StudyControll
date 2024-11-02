@@ -12,6 +12,7 @@
     justify-content: center;
 }
 .button{
+    font-size: 18px;
     margin: 20px;
     padding: 1rem; 
     background-color: #1B1B1B; 

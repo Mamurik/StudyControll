@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useGetLabByIdQuery } from "../../http/labApi";
 import { useGetSubjectsQuery } from "../../http/subjectApi";
 import classes from "./Lab.module.css";
+
 const Lab: React.FC = () => {
   const [labId, setLabId] = useState<number | undefined>(undefined);
   const [lastLab, setLastLab] = useState<any>(null);
@@ -18,6 +19,8 @@ const Lab: React.FC = () => {
   useEffect(() => {
     if (lab && !labError) {
       setLastLab(lab);
+    } else if (labError) {
+      setLastLab(null);
     }
   }, [lab, labError]);
 
@@ -39,12 +42,12 @@ const Lab: React.FC = () => {
       <input
         className={classes.lab_input}
         type="number"
-        value={labId ?? ""}
+        value={labId}
         onChange={handleInputChange}
         placeholder="Введите ID лабораторной работы"
       />
       {(labLoading || subjectsLoading) && <div>Загрузка...</div>}
-      {labError && <div>Ошибка</div>}{" "}
+      {labError && <div>Ошибка: Лабораторная работа не найдена</div>}
       {lastLab && (
         <div className={classes.lab_List}>
           <h2 className={classes.lab_h2}>
@@ -56,7 +59,7 @@ const Lab: React.FC = () => {
           </h3>
           <h3 className={classes.lab_h3}>
             Предмет: {subjectName || "Не найден"}
-          </h3>{" "}
+          </h3>
         </div>
       )}
     </div>

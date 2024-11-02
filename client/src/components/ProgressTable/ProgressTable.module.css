@@ -43,7 +43,13 @@
   .progress_tr:hover {
     background-color: #505050;
   }
-  
+  .icon{
+    cursor: pointer;
+    width: 16px;
+    float: right;
+    text-align: center;
+    margin-top: 5px;
+  }
   .status_input{
     background: #606060;
     width: 100%;
