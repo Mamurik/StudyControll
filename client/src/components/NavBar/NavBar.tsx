@@ -20,7 +20,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const isOpen = useSelector((state: RootState) => state.burger.isOpen);
   const userBurgerRef = useRef<HTMLDivElement | null>(null); // Создаем реф для UserBurger
-  const userRole = useSelector((state: RootState) => state.user.user?.role);
+
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -66,13 +66,9 @@ const NavBar = () => {
         {isAuth ? (
           <ul className={classes.list}>
             <li className={classes.list_item}>
-              {userRole === "admin" && (
-                <Link to={ADMIN_ROUTE}>
-                  <button className={classes.list_item_but}>
-                    Админ Панель
-                  </button>
-                </Link>
-              )}
+              <Link to={ADMIN_ROUTE}>
+                <button className={classes.list_item_but}>Админ Панель</button>
+              </Link>
             </li>
             <li className={classes.list_item}>
               <Link to={USERLABPROGRESS_ROUTE}>

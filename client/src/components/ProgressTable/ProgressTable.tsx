@@ -6,7 +6,6 @@ import { getBackgroundColor } from "../../utils/funcs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleDown,
-  faArrowsUpDown,
   faArrowUpWideShort,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
@@ -26,15 +25,16 @@ const ProgressTable: FC<ProgressTableProps> = ({
   isUpdateLoading,
   handleStatusChange,
 }) => {
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc"); // Состояние для порядка сортировки
 
   const handleSort = () => {
     setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
+  // Функция сортировки лабораторных работ
   const sortedLabProgress = [...filteredLabProgress].sort((a, b) => {
-    const labANumber = a.lab?.lab_number || 0;
-    const labBNumber = b.lab?.lab_number || 0;
+    const labANumber = a.lab?.lab_number || 0; // Получаем номер лабораторной A
+    const labBNumber = b.lab?.lab_number || 0; // Получаем номер лабораторной B
     return sortOrder === "asc"
       ? labANumber - labBNumber
       : labBNumber - labANumber;
@@ -58,9 +58,9 @@ const ProgressTable: FC<ProgressTableProps> = ({
               <th className={classes.progress_th}>
                 Номер лабораторной
                 <FontAwesomeIcon
-                  icon={faArrowsUpDown}
+                  icon={faArrowAltCircleDown}
                   onClick={handleSort}
-                  className={classes.icon}
+                  style={{ cursor: "pointer" }}
                 />
               </th>
               <th className={classes.progress_th}>Макс. баллы</th>

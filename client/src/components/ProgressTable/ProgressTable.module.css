@@ -1,80 +1,79 @@
 
 .container {
-    display: grid;
-    grid-template-rows: repeat(2,0fr);
-    max-width: 1000px;
-    margin: 50px auto 10px;
-    padding: 20px;
-    color: #fff;
-  }
-  
-  .container_h2 {
-    text-align: center;
-    color: #ffffff;
-    margin-bottom: 30px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .progress_table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .progress_thead {
-    background-color: #777575;
-  }
-  
-  .progress_th,
-  .progress_td {
+  display: grid;
+  grid-template-rows: repeat(2,0fr);
+  max-width: 1000px;
+  margin: 50px auto 10px;
+  padding: 20px;
+  color: #fff;
+}
+
+.container_h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.progress_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.progress_thead {
+  background-color: #777575;
+}
+
+.progress_th,
+.progress_td {
+  padding: 15px;
+  border: 2px solid #000000;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+}
+.progress_td:last-child{
+  padding: 0px;
+  margin: 0px;
+}
+.progress_tr{
+  background: #606060;
+}
+.progress_tr:hover {
+  background-color: #505050;
+}
+.icon{
+  cursor: pointer;
+  width: 16px;
+  float: right;
+  text-align: center;
+  margin-top: 4px;
+}
+.status_input{
+  background: #606060;
+  width: 100%;
+  height:52px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  border: none  ;
+}
+.status_input:hover{
+  background-color: #505050;
+}
+.status_input:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+.progress_td_red{
+  background: greenyellow;
+}
+
+@media (max-width: 768px) {
+  .container {
     padding: 15px;
-    border: 2px solid #000000;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 800;
   }
-  .progress_td:last-child{
-    padding: 0px;
-    margin: 0px;
-  }
-  .progress_tr{
-    background: #606060;
-  }
-  .progress_tr:hover {
-    background-color: #505050;
-  }
-  .icon{
-    cursor: pointer;
-    width: 16px;
-    float: right;
-    text-align: center;
-    margin-top: 5px;
-  }
-  .status_input{
-    background: #606060;
-    width: 100%;
-    height:52px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 800;
-    border: none  ;
-  }
-  .status_input:hover{
-    background-color: #505050;
-  }
-  .status_input:focus {
-    outline: none;
-    border-color: #007acc;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-  }
-  .progress_td_red{
-    background: greenyellow;
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 15px;
-    }
-  }
-  
-  
+}
+
