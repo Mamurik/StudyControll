@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IUserLabProgress } from "../../API/api";
 import ProgressResults from "../../components/ProgressResults/ProgressResults";
 import ProgressTable from "../../components/ProgressTable/ProgressTable";
@@ -10,20 +10,22 @@ import {
   useRemoveUserLabProgressMutation,
   useUpdateUserLabProgressMutation,
 } from "../../http/userLabProgressApi";
+import { setUserLabProgress } from "../../store/Slices/userLabProgressSlice";
 import { RootState } from "../../store/store";
 import classes from "./UserLabProgres.module.css";
-import { setUserLabProgress } from "../../store/Slices/userLabProgressSlice";
-import { useDispatch } from "react-redux";
+import ProgressModal from "../../components/ProgressTable/ProgressModal/ProgressModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const UserLabProgress: React.FC = () => {
+  const [modal, setModal] = useState<boolean>(false);
   const dispatch = useDispatch();
   const idOfUser = useSelector((state: RootState) => state.user.user?.id);
   const username = useSelector((state: RootState) => state.user.user?.username);
   const selectedSubject = useSelector(
     (state: RootState) => state.subject.selectedSubject
   );
-  const [addLabProgress, { isLoading: isAddingLabProgress }] =
-    useAddUserLabProgressMutation();
+  const [addLabProgress] = useAddUserLabProgressMutation();
   const {
     data: userLabProgress = [],
     isLoading,
@@ -32,12 +34,11 @@ const UserLabProgress: React.FC = () => {
   } = useGetUserLabProgressQuery(idOfUser as number, { skip: !idOfUser });
   const [updateStatus, { isLoading: isUpdateLoading }] =
     useUpdateUserLabProgressMutation();
-  const [removeLabProgress, { isLoading: isRemovingLabProgress }] =
-    useRemoveUserLabProgressMutation();
+  const [removeLabProgress] = useRemoveUserLabProgressMutation();
   const [localProgress, setLocalProgress] =
     useState<IUserLabProgress[]>(userLabProgress);
-
   const [input, setInput] = useState<number>(0);
+
   const handleAdd = async () => {
     if (!idOfUser) return;
     try {
@@ -53,8 +54,13 @@ const UserLabProgress: React.FC = () => {
       setInput(0);
       await refetch();
     } catch (error) {
-      console.log("error");
+      console.error("Error adding lab progress:", error);
     }
+  };
+
+  const toggleModal = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setModal(!modal);
   };
 
   const handleRemove = async (labProgressId: number) => {
@@ -118,18 +124,28 @@ const UserLabProgress: React.FC = () => {
     <div className={classes.main_container}>
       <ProgressTable
         handleRemove={handleRemove}
-        input={input}
-        setInput={setInput}
-        handleAdd={handleAdd}
         handleStatusChange={handleStatusChange}
         filteredLabProgress={filteredLabProgress}
         isUpdateLoading={isUpdateLoading}
         selectedSubject={selectedSubject}
         username={username}
       />
-      <ProgressResults
-        filteredLabProgress={filteredLabProgress}
-      ></ProgressResults>
+      <div className={classes.add_zone}>
+        <h2 className={classes.h2}>Добавить лабу в прогресс </h2>
+        <FontAwesomeIcon
+          onClick={toggleModal}
+          className={classes.AddIcon}
+          icon={faPlus}
+        />
+      </div>
+      <ProgressResults filteredLabProgress={filteredLabProgress} />
+      <ProgressModal
+        input={input}
+        setInput={setInput}
+        handleAdd={handleAdd}
+        toggleModal={toggleModal}
+        show={modal}
+      />
     </div>
   );
 };

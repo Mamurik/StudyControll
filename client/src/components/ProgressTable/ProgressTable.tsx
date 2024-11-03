@@ -1,15 +1,10 @@
-import {
-  faArrowsUpDown,
-  faMinus,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowsUpDown, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { ISubject, IUserLabProgress } from "../../API/api";
 import { getBackgroundColor } from "../../utils/funcs";
 import SubjectBar from "../SubjectBar/SubjectBar";
 import classes from "./ProgressTable.module.css";
-import AuthInput from "../UI/AuthInput/AuthInput";
 
 interface ProgressTableProps {
   username: string | undefined;
@@ -17,10 +12,7 @@ interface ProgressTableProps {
   filteredLabProgress: IUserLabProgress[];
   isUpdateLoading: boolean;
   handleStatusChange: (id: number, e: number) => void;
-  handleAdd: () => void;
   handleRemove: (id: number) => void;
-  input: number;
-  setInput: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const ProgressTable: FC<ProgressTableProps> = ({
@@ -29,10 +21,7 @@ const ProgressTable: FC<ProgressTableProps> = ({
   filteredLabProgress,
   isUpdateLoading,
   handleStatusChange,
-  handleAdd,
   handleRemove,
-  input,
-  setInput,
 }) => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
@@ -58,22 +47,6 @@ const ProgressTable: FC<ProgressTableProps> = ({
         {selectedSubject ? "По предмету " + selectedSubject.name : "Все "}
         {selectedSubject ? " " + selectedSubject.total_labs + " Лаб" : "Лабы"}
       </h2>
-      <div className={classes.addContainer}>
-        <input
-          className={classes.add_Input}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setInput(Number(e.target.value))
-          }
-          placeholder="Айди лабы"
-          value={input.toString()}
-          type="number"
-        />
-        <FontAwesomeIcon
-          onClick={handleAdd}
-          className={classes.AddIcon}
-          icon={faPlus}
-        ></FontAwesomeIcon>
-      </div>
       {sortedLabProgress.length > 0 ? (
         <table className={classes.progress_table}>
           <thead className={classes.progress_thead}>

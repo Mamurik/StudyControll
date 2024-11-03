@@ -37,12 +37,8 @@ const ProgressResults: FC<ProgressResultsProps> = ({ filteredLabProgress }) => {
   return (
     <div className={classes.progress_results}>
       <p className={classes.progress_results_p}>
-        Полученные Баллы: {subjectProgress}
+        Полученные Баллы: {subjectProgress} / {subjectMaxPoints}
       </p>
-      <p className={classes.progress_results_p}>
-        Максимум Баллов: {subjectMaxPoints}
-      </p>
-
       <input
         className={classes.progress_results_inpt}
         type="range"
