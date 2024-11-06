@@ -20,9 +20,8 @@
 - [![Express](https://img.icons8.com/color/48/000000/express.png)](https://expressjs.com/) **Express.js**
 - ![PostgreSQL](https://img.icons8.com/color/48/000000/postgreesql.png) **PostgreSQL**
 
-## PostMan для http запросов
 
-[![Postman](https://img.icons8.com/color/48/000000/postman.png)](https://www.postman.com/) **Postman**
+
 
 ## Запуск приложения
 
